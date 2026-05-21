@@ -4,10 +4,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ISP_Game
 {
-    public class Game1 : Game
+    public class Game1 : Game //3rd person, look down on map, keyboard to move sprite to explore rooms, bump into things reveals them
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        Rectangle mainWindow;
+        Texture2D menuScreen;
+
+        enum Screen
+        {
+            Menu,
+            Level0,
+            Level1,
+            GameOver,
+            GameWin
+        }
+        Screen screen;
 
         public Game1()
         {
@@ -18,7 +30,12 @@ namespace ISP_Game
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            screen = Screen.Menu;
+            mainWindow = new Rectangle(0, 0, 800, 600);
+            _graphics.PreferredBackBufferHeight = mainWindow.Height;
+            _graphics.PreferredBackBufferWidth = mainWindow.Width;
+            _graphics.ApplyChanges();
+
 
             base.Initialize();
         }
@@ -26,8 +43,8 @@ namespace ISP_Game
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            menuScreen = Content.Load<Texture2D>(" ");
 
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -35,7 +52,7 @@ namespace ISP_Game
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
+            
 
             base.Update(gameTime);
         }
@@ -43,8 +60,14 @@ namespace ISP_Game
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            _spriteBatch.Begin();
 
-            // TODO: Add your drawing code here
+            if (screen == Screen.Menu)
+            {
+                _spriteBatch.Draw(menuScreen, new Rectangle(0, 0, 800, 600), Color.White);
+
+            }
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
