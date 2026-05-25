@@ -9,16 +9,25 @@ namespace ISP_Game
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Rectangle mainWindow;
+        Rectangle goIn;
+        Rectangle escape;
+        Rectangle button0;
         Texture2D menuScreen;
         Texture2D tutorial;
         Texture2D level1;
-
+        Texture2D hallway1;
+        Texture2D hallway2;
+        Texture2D goInButton;
+        Texture2D escapeButton;
+        MouseState mouseState;
 
         enum Screen
         {
             Menu,
             Level0,
+            Hall1,
             Level1,
+            Hall2,
             GameOver,
             GameWin
         }
@@ -33,12 +42,14 @@ namespace ISP_Game
 
         protected override void Initialize()
         {
-            screen = Screen.Level1;
+            screen = Screen.Menu;
             mainWindow = new Rectangle(0, 0, 800, 600);
             _graphics.PreferredBackBufferHeight = mainWindow.Height;
             _graphics.PreferredBackBufferWidth = mainWindow.Width;
             _graphics.ApplyChanges();
-
+            goIn = new Rectangle(20, 205, 205, 255);
+            button0 = new Rectangle(270, 20, 660, 95);
+            escape = new Rectangle(20, 115, 210, 165);
 
             base.Initialize();
         }
@@ -46,17 +57,49 @@ namespace ISP_Game
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            //menuScreen = Content.Load<Texture2D>(" ");
+            menuScreen = Content.Load<Texture2D>("Menu");
             tutorial = Content.Load<Texture2D>("0");
             level1 = Content.Load<Texture2D>("1");
+            hallway1 = Content.Load<Texture2D>("DaycareHall");
+            hallway2 = Content.Load<Texture2D>("SchoolHall");
+            goInButton = Content.Load<Texture2D>("GoIn");
+            escapeButton = Content.Load<Texture2D>("Escape");
+            
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            mouseState = Mouse.GetState();
+            Window.Title = "Toy Box " + mouseState.Position.ToString();
+            //collect 3 toys, move to door, have rectangle in front, code so it only advances when 3 toys are collected, display hallway photo for short time sound then move to next level.
 
-            
+            if (screen == Screen.Menu)
+            {
+                if (goIn.Contains(mouseState.Position))
+                {
+                    //if (mouseState.RightButton == ButtonState.Pressed)
+                    //{
+                    //    screen = Screen.Level0;
+                    //}
+                    if (mouseState.RightButton == ButtonState.Pressed)
+                    {
+                        screen = Screen.Level0;
+                    }
+                }
+                if (escape.Contains(mouseState.Position))
+                {
+                    //if (mouseState.RightButton == ButtonState.Pressed)
+                    //{
+                    //    screen = Screen.Level0;
+                    //}
+                    if (mouseState.LeftButton == ButtonState.Pressed)
+                    {
+                        Exit();
+                    }
+                }
+            }
 
             base.Update(gameTime);
         }
@@ -66,18 +109,26 @@ namespace ISP_Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
             _spriteBatch.Begin();
 
-            if (screen == Screen.Menu)
+            if (screen == Screen.Menu) //menu
             {
                 _spriteBatch.Draw(menuScreen, new Rectangle(0, 0, 800, 600), Color.White);
 
             }
-            else if (screen == Screen.Level0)
+            else if (screen == Screen.Level0) //Tutorial
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
             }
-            else if (screen == Screen.Level1)
+            else if (screen == Screen.Hall1) //hallway to level 1
+            {
+                _spriteBatch.Draw(hallway1, new Rectangle(0, 0, 300, 600), Color.White);
+            }
+            else if (screen == Screen.Level1) //level 1
             {
                 _spriteBatch.Draw(level1, new Rectangle(0, 0, 800, 600), Color.White);
+            }
+            else if (screen == Screen.Hall2) //hallway to level 2
+            {
+                _spriteBatch.Draw(hallway2, new Rectangle(0, 0, 300, 600), Color.White);
             }
 
             _spriteBatch.End();
