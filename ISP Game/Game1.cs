@@ -32,10 +32,10 @@ namespace ISP_Game
 
         enum Screen
         {
-            Menu,
-            Level0,
+            Menu, //fallen down
+            Level0, //lost woods
             Hall1,
-            Level1,
+            Level1, //numbers
             Hall2,
             GameOver,
             GameWin
@@ -131,7 +131,25 @@ namespace ISP_Game
                 //}
             }
 
-                base.Update(gameTime);
+            else if (screen == Screen.Hall1)
+            {
+                if (keyboardState.IsKeyDown(Keys.O))
+                {
+                    screen = Screen.Level1;
+                }
+                
+            }
+
+            else if (screen == Screen.Level1)
+            {
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    screen = Screen.Hall2;
+                }
+
+            }
+
+            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
