@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace ISP_Game
 {
@@ -30,13 +31,18 @@ namespace ISP_Game
         MouseState mouseState;
         KeyboardState keyboardState;
 
+        Song fallenDown;
+        Song lostWoods;
+        Song carousel;
+        
+
         enum Screen
         {
             Menu, //fallen down
-            Level0, //lost woods
-            Hall1,
+            Level0, //lost woods, fade in and out. Replace audio
+            Hall1, //door open and close
             Level1, //numbers
-            Hall2,
+            Hall2, //door open and close
             GameOver,
             GameWin
         }
@@ -82,7 +88,10 @@ namespace ISP_Game
             hallway2 = Content.Load<Texture2D>("SchoolHall");
             goInButton = Content.Load<Texture2D>("GoIn");
             escapeButton = Content.Load<Texture2D>("Escape");
-            
+            fallenDown = Content.Load<Song>("FallenDown");
+            lostWoods = Content.Load<Song>("LostWoods");
+            carousel = Content.Load<Song>("Carousel");
+
         }
 
         protected override void Update(GameTime gameTime)
@@ -91,17 +100,26 @@ namespace ISP_Game
                 Exit();
             mouseState = Mouse.GetState();
             keyboardState = Keyboard.GetState();
+            
             Window.Title = "Toy Box " + mouseState.Position.ToString();
             //collect 3 toys, move to door, have rectangle in front, code so it only advances when 3 toys are collected, display hallway photo for short time sound then move to next level.
 
             if (screen == Screen.Menu)
             {
+               if (MediaPlayer.State == MediaState.Stopped)
+               {
+                   MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(fallenDown);
+               }
+
                 if (goIn.Contains(mouseState.Position))
                 {
                     
                     if (mouseState.RightButton == ButtonState.Pressed)
                     {
                         screen = Screen.Level0;
+                        MediaPlayer.Stop();
                     }
                 }
                 if (escape.Contains(mouseState.Position))
@@ -112,13 +130,23 @@ namespace ISP_Game
                         Exit();
                     }
                 }
+
             }
 
             else if (screen == Screen.Level0)
             {
+               
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(lostWoods);
+                }
+
                 if (keyboardState.IsKeyDown(Keys.E))
                 {
                     screen = Screen.Hall1;
+                    MediaPlayer.Stop();
                     //door open and close sound, then continue to level1
                 }
                 //if (level0Exit.Contains(mouseState.Position))
@@ -142,6 +170,13 @@ namespace ISP_Game
 
             else if (screen == Screen.Level1)
             {
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(carousel);
+                }
+
                 if (keyboardState.IsKeyDown(Keys.W))
                 {
                     screen = Screen.Hall2;
