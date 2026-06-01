@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Collections.Generic;
 
 namespace ISP_Game
 {
@@ -12,7 +13,8 @@ namespace ISP_Game
 
     public class Walls
     {
-        Rectangle wall; //width is 9
+        List<Rectangle> walls = new List<Rectangle> { };
+        //Rectangle wall; //width is 9
 
     }
 
@@ -54,8 +56,8 @@ namespace ISP_Game
             Hall1, //door open and close
             Level1, //numbers
             Hall2, //door open and close
-            GameOver,
-            GameWin
+            GameOver, //"The END is just the BEGINing" click on end to esc, click on begin to restart
+            GameWin //"You escaped"
         }
         Screen screen;
 
@@ -211,6 +213,7 @@ namespace ISP_Game
             else if (screen == Screen.Level0) //Tutorial
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
+                _spriteBatch.Draw(escapeButton, new Rectangle(685, 5, 112, 35), Color.White);
             }
             else if (screen == Screen.Hall1) //hallway to level 1
             {
