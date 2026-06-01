@@ -31,6 +31,7 @@ namespace ISP_Game
         Rectangle button0;
         Rectangle level0Exit;
         Rectangle level1Exit;
+        Rectangle menuEscape;
          
 
         Texture2D menuScreen;
@@ -75,6 +76,8 @@ namespace ISP_Game
             _graphics.PreferredBackBufferHeight = mainWindow.Height;
             _graphics.PreferredBackBufferWidth = mainWindow.Width;
             _graphics.ApplyChanges();
+            menuEscape = new Rectangle(685, 5, 112, 35);
+
             if (screen == Screen.Menu)
             {
                 goIn = new Rectangle(20, 205, 205, 255);
@@ -100,7 +103,7 @@ namespace ISP_Game
             hallway1 = Content.Load<Texture2D>("DaycareHall");
             hallway2 = Content.Load<Texture2D>("SchoolHall");
             goInButton = Content.Load<Texture2D>("GoIn");
-            escapeButton = Content.Load<Texture2D>("Escape");
+            escapeButton = Content.Load<Texture2D>("EscapeButton");
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
             carousel = Content.Load<Song>("Carousel");
@@ -148,7 +151,14 @@ namespace ISP_Game
 
             else if (screen == Screen.Level0)
             {
-               
+               if (menuEscape.Contains(mouseState.Position))
+               {
+                    if (keyboardState.IsKeyDown(Keys.Escape))
+                    {
+                        screen = Screen.Menu;
+                    }
+               }
+
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
                     MediaPlayer.IsRepeating = true;
@@ -213,7 +223,7 @@ namespace ISP_Game
             else if (screen == Screen.Level0) //Tutorial
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
-                _spriteBatch.Draw(escapeButton, new Rectangle(685, 5, 112, 35), Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
             }
             else if (screen == Screen.Hall1) //hallway to level 1
             {
@@ -222,6 +232,7 @@ namespace ISP_Game
             else if (screen == Screen.Level1) //level 1
             {
                 _spriteBatch.Draw(level1, new Rectangle(0, 0, 800, 600), Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
             }
             else if (screen == Screen.Hall2) //hallway to level 2
             {
