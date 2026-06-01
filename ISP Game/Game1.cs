@@ -10,8 +10,17 @@ namespace ISP_Game
 
     }
 
+    public class Walls
+    {
+        Rectangle wall; //width is 9
+
+    }
+
+
     public class Game1 : Game //3rd person, look down on map, keyboard to move sprite to explore rooms, bump into things reveals them
     {
+       
+        
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         Rectangle mainWindow;
@@ -20,6 +29,7 @@ namespace ISP_Game
         Rectangle button0;
         Rectangle level0Exit;
         Rectangle level1Exit;
+         
 
         Texture2D menuScreen;
         Texture2D tutorial;
@@ -28,6 +38,7 @@ namespace ISP_Game
         Texture2D hallway2;
         Texture2D goInButton;
         Texture2D escapeButton;
+        
         MouseState mouseState;
         KeyboardState keyboardState;
 
@@ -173,7 +184,7 @@ namespace ISP_Game
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
                     MediaPlayer.IsRepeating = true;
-                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Volume = 0.2f;
                     MediaPlayer.Play(carousel);
                 }
 
