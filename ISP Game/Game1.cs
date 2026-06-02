@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace ISP_Game
 {
@@ -13,8 +14,8 @@ namespace ISP_Game
 
     public class Walls
     {
-        List<Rectangle> walls = new List<Rectangle> { };
-        //Rectangle wall; //width is 9
+        List<Rectangle> mapWalls = new List<Rectangle>();
+       // mapWalls.Add(new Rectangle(0,0,600,30));
 
     }
 
@@ -120,6 +121,15 @@ namespace ISP_Game
             Window.Title = "Toy Box " + mouseState.Position.ToString();
             //collect 3 toys, move to door, have rectangle in front, code so it only advances when 3 toys are collected, display hallway photo for short time sound then move to next level.
 
+           if (menuEscape.Contains(mouseState.Position))
+           {
+                if (mouseState.RightButton == ButtonState.Pressed)
+                {
+                    screen = Screen.Menu;
+                    MediaPlayer.Stop();
+                }
+            }
+
             if (screen == Screen.Menu)
             {
                if (MediaPlayer.State == MediaState.Stopped)
@@ -144,6 +154,15 @@ namespace ISP_Game
                     if (mouseState.LeftButton == ButtonState.Pressed)
                     {
                         Exit();
+                    }
+                }
+               
+                if (button0.Contains(mouseState.Position))
+                {
+                    if (mouseState.RightButton == ButtonState.Pressed)
+                    {
+                        screen = Screen.Level0;
+                        MediaPlayer.Stop();
                     }
                 }
 
