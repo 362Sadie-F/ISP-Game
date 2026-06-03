@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
@@ -42,6 +43,7 @@ namespace ISP_Game
         Texture2D hallway2;
         Texture2D goInButton;
         Texture2D escapeButton;
+        Texture2D gameEnd;
         
         MouseState mouseState;
         KeyboardState keyboardState;
@@ -49,6 +51,11 @@ namespace ISP_Game
         Song fallenDown;
         Song lostWoods;
         Song carousel;
+        SoundEffect death;
+        SoundEffectInstance deathEffect;
+        SoundEffect emptyRoom;
+        SoundEffectInstance emptyRoomEffect;
+       
         
 
         enum Screen
@@ -105,9 +112,16 @@ namespace ISP_Game
             hallway2 = Content.Load<Texture2D>("SchoolHall");
             goInButton = Content.Load<Texture2D>("GoIn");
             escapeButton = Content.Load<Texture2D>("EscapeButton");
+            gameEnd = Content.Load<Texture2D>("GameOver");
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
             carousel = Content.Load<Song>("Carousel");
+            emptyRoom = Content.Load<SoundEffect>("EmptyRoom");
+            emptyRoomEffect = emptyRoom.CreateInstance();
+            emptyRoomEffect.IsLooped = true;
+            death = Content.Load<SoundEffect>("de@thEffect");
+            deathEffect = death.CreateInstance();
+            deathEffect.IsLooped = false;
 
         }
 
@@ -132,16 +146,16 @@ namespace ISP_Game
 
             if (screen == Screen.Menu)
             {
-               if (MediaPlayer.State == MediaState.Stopped)
-               {
-                   MediaPlayer.IsRepeating = true;
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.IsRepeating = true;
                     MediaPlayer.Volume = 0.5f;
                     MediaPlayer.Play(fallenDown);
-               }
+                }
 
                 if (goIn.Contains(mouseState.Position))
                 {
-                    
+
                     if (mouseState.RightButton == ButtonState.Pressed)
                     {
                         screen = Screen.Level0;
@@ -150,13 +164,13 @@ namespace ISP_Game
                 }
                 if (escape.Contains(mouseState.Position))
                 {
-                    
+
                     if (mouseState.LeftButton == ButtonState.Pressed)
                     {
                         Exit();
                     }
                 }
-               
+
                 if (button0.Contains(mouseState.Position))
                 {
                     if (mouseState.RightButton == ButtonState.Pressed)
@@ -170,13 +184,13 @@ namespace ISP_Game
 
             else if (screen == Screen.Level0)
             {
-               if (menuEscape.Contains(mouseState.Position))
-               {
+                if (menuEscape.Contains(mouseState.Position))
+                {
                     if (keyboardState.IsKeyDown(Keys.Escape))
                     {
                         screen = Screen.Menu;
                     }
-               }
+                }
 
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
@@ -199,6 +213,13 @@ namespace ISP_Game
                 //        screen = Screen.Hall1;
                 //    }
                 //}
+                
+                 if (keyboardState.IsKeyDown(Keys.G))
+                 {
+                   screen = Screen.GameOver;
+                   MediaPlayer.Stop();
+                 }
+                
             }
 
             else if (screen == Screen.Hall1)
@@ -207,7 +228,7 @@ namespace ISP_Game
                 {
                     screen = Screen.Level1;
                 }
-                
+
             }
 
             else if (screen == Screen.Level1)
@@ -226,7 +247,23 @@ namespace ISP_Game
 
             }
 
-            base.Update(gameTime);
+            else if (screen == Screen.GameOver)
+            {
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    deathEffect.Play();
+                    deathEffect.IsLooped = false;
+
+                    if (deathEffect.IsLooped == false)
+                    {
+                        emptyRoomEffect.IsLooped = true;
+                        emptyRoomEffect.Play();
+                    }
+
+                }
+            }
+
+                base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -256,6 +293,10 @@ namespace ISP_Game
             else if (screen == Screen.Hall2) //hallway to level 2
             {
                 _spriteBatch.Draw(hallway2, new Rectangle(0, 0, 800, 600), Color.White);
+            }
+            else if (screen == Screen.GameOver) //game loose
+            {
+                _spriteBatch.Draw(gameEnd, new Rectangle(0, 0, 800, 600), Color.White);
             }
 
             _spriteBatch.End();
