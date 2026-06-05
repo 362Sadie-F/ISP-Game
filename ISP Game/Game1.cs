@@ -34,7 +34,10 @@ namespace ISP_Game
         Rectangle level0Exit;
         Rectangle level1Exit;
         Rectangle menuEscape;
-         
+        //Rectangle spriteSize;
+        //Vector2 spritePosition;
+        //float spriteSpeed;
+        
 
         Texture2D menuScreen;
         Texture2D tutorial;
@@ -44,6 +47,10 @@ namespace ISP_Game
         Texture2D goInButton;
         Texture2D escapeButton;
         Texture2D gameEnd;
+        Texture2D sprite;
+        Texture2D toyBear;
+        Texture2D toyCat;
+        Texture2D toyDoll;
         
         MouseState mouseState;
         KeyboardState keyboardState;
@@ -96,6 +103,9 @@ namespace ISP_Game
             else if (screen == Screen.Level0)
             {
                 level0Exit = new Rectangle(615, 230, 625, 285);
+                //spriteSize = new Rectangle(15, 255, 40, 40);
+                //spritePosition = new Vector2(15, 255);
+                //spriteSpeed = 150f;
             }
             // level1Exit = new Rectangle(20, 115, 210, 165);
 
@@ -122,6 +132,7 @@ namespace ISP_Game
             death = Content.Load<SoundEffect>("de@thEffect");
             deathEffect = death.CreateInstance();
             deathEffect.IsLooped = false;
+            sprite = Content.Load<Texture2D>("SpriteIdle");
 
         }
 
@@ -131,6 +142,7 @@ namespace ISP_Game
                 Exit();
             mouseState = Mouse.GetState();
             keyboardState = Keyboard.GetState();
+            //float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             
             Window.Title = "Toy Box " + mouseState.Position.ToString();
             //collect 3 toys, move to door, have rectangle in front, code so it only advances when 3 toys are collected, display hallway photo for short time sound then move to next level.
@@ -219,7 +231,24 @@ namespace ISP_Game
                    screen = Screen.GameOver;
                    MediaPlayer.Stop();
                  }
-                
+
+                //if (keyboardState.IsKeyDown(Keys.W))
+                //{
+                //    spritePosition.Y -= spriteSpeed * deltaTime;
+                //}
+                //if (keyboardState.IsKeyDown(Keys.S))
+                //{
+                //    spritePosition.Y += spriteSpeed * deltaTime;
+                //}
+                //if (keyboardState.IsKeyDown(Keys.A))
+                //{
+                //    spritePosition.X -= spriteSpeed * deltaTime;
+                //}
+                //if (keyboardState.IsKeyDown(Keys.D))
+                //{
+                //    spritePosition.X += spriteSpeed * deltaTime;
+                //}
+
             }
 
             else if (screen == Screen.Hall1)
@@ -240,7 +269,7 @@ namespace ISP_Game
                     MediaPlayer.Play(carousel);
                 }
 
-                if (keyboardState.IsKeyDown(Keys.W))
+                if (keyboardState.IsKeyDown(Keys.P))
                 {
                     screen = Screen.Hall2;
                 }
@@ -280,6 +309,8 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+                //_spriteBatch.Draw(sprite, spritePosition, Color.White);
+
             }
             else if (screen == Screen.Hall1) //hallway to level 1
             {
