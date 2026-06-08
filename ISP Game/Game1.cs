@@ -34,9 +34,12 @@ namespace ISP_Game
         Rectangle level0Exit;
         Rectangle level1Exit;
         Rectangle menuEscape;
+        Rectangle toyLocation1;
+        Rectangle toyLocation2;
+        Rectangle toyLocation3;
         //Rectangle spriteSize;
-        //Vector2 spritePosition;
-        //float spriteSpeed;
+        //Vector2 spriteSpeed;
+        
         
 
         Texture2D menuScreen;
@@ -104,8 +107,7 @@ namespace ISP_Game
             {
                 level0Exit = new Rectangle(615, 230, 625, 285);
                 //spriteSize = new Rectangle(15, 255, 40, 40);
-                //spritePosition = new Vector2(15, 255);
-                //spriteSpeed = 150f;
+                
             }
             // level1Exit = new Rectangle(20, 115, 210, 165);
 
@@ -123,6 +125,7 @@ namespace ISP_Game
             goInButton = Content.Load<Texture2D>("GoIn");
             escapeButton = Content.Load<Texture2D>("EscapeButton");
             gameEnd = Content.Load<Texture2D>("GameOver");
+            toyBear = Content.Load<Texture2D>("bearToy");
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
             carousel = Content.Load<Song>("Carousel");
@@ -142,7 +145,7 @@ namespace ISP_Game
                 Exit();
             mouseState = Mouse.GetState();
             keyboardState = Keyboard.GetState();
-            //float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
             
             Window.Title = "Toy Box " + mouseState.Position.ToString();
             //collect 3 toys, move to door, have rectangle in front, code so it only advances when 3 toys are collected, display hallway photo for short time sound then move to next level.
@@ -234,19 +237,19 @@ namespace ISP_Game
 
                 //if (keyboardState.IsKeyDown(Keys.W))
                 //{
-                //    spritePosition.Y -= spriteSpeed * deltaTime;
+                //    
                 //}
                 //if (keyboardState.IsKeyDown(Keys.S))
                 //{
-                //    spritePosition.Y += spriteSpeed * deltaTime;
+                //    
                 //}
                 //if (keyboardState.IsKeyDown(Keys.A))
                 //{
-                //    spritePosition.X -= spriteSpeed * deltaTime;
+                //    
                 //}
                 //if (keyboardState.IsKeyDown(Keys.D))
                 //{
-                //    spritePosition.X += spriteSpeed * deltaTime;
+                //   
                 //}
 
             }
