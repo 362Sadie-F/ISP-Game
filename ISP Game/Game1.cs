@@ -16,7 +16,10 @@ namespace ISP_Game
     public class Walls
     {
         List<Rectangle> mapWalls = new List<Rectangle>();
-       // mapWalls.Add(new Rectangle(0,0,600,30));
+        // mapWalls.Add(new Rectangle(0,0,600,30));
+        // new Rectangle(0,553,800,47)
+        // new Rectangle(0,0,600,30)
+        // new Rectangle(0,0,600,30)
 
     }
 
@@ -37,8 +40,8 @@ namespace ISP_Game
         Rectangle toyLocation1;
         Rectangle toyLocation2;
         Rectangle toyLocation3;
-        //Rectangle spriteSize;
-        //Vector2 spriteSpeed;
+        Rectangle spriteSize;
+        Vector2 spriteSpeed;
         
         
 
@@ -95,6 +98,11 @@ namespace ISP_Game
             _graphics.PreferredBackBufferWidth = mainWindow.Width;
             _graphics.ApplyChanges();
             menuEscape = new Rectangle(685, 5, 112, 35);
+            toyLocation1 = new Rectangle(714, 381, 30, 30);
+            toyLocation2 = new Rectangle(25, 358, 30, 30);
+            toyLocation3 = new Rectangle(289, 38, 30, 30);
+            spriteSize = new Rectangle(15, 255, 40, 40);
+            spriteSpeed = Vector2.Zero;
 
             if (screen == Screen.Menu)
             {
@@ -106,7 +114,9 @@ namespace ISP_Game
             else if (screen == Screen.Level0)
             {
                 level0Exit = new Rectangle(615, 230, 625, 285);
-                //spriteSize = new Rectangle(15, 255, 40, 40);
+                
+                
+                
                 
             }
             // level1Exit = new Rectangle(20, 115, 210, 165);
@@ -235,22 +245,24 @@ namespace ISP_Game
                    MediaPlayer.Stop();
                  }
 
-                //if (keyboardState.IsKeyDown(Keys.W))
-                //{
-                //    
-                //}
-                //if (keyboardState.IsKeyDown(Keys.S))
-                //{
-                //    
-                //}
-                //if (keyboardState.IsKeyDown(Keys.A))
-                //{
-                //    
-                //}
-                //if (keyboardState.IsKeyDown(Keys.D))
-                //{
-                //   
-                //}
+                spriteSpeed = Vector2.Zero;
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    spriteSpeed.Y -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    spriteSpeed.Y += 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    spriteSpeed.X -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    spriteSpeed.X += 2;
+                }
+                spriteSize.Offset(spriteSpeed);
 
             }
 
@@ -312,7 +324,10 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
-                //_spriteBatch.Draw(sprite, spritePosition, Color.White);
+                _spriteBatch.Draw(toyBear, toyLocation1, Color.White);
+                //_spriteBatch.Draw(toyCat, toyLocation2, Color.White);
+               // _spriteBatch.Draw(toyDoll, toyLocation3, Color.White);
+                _spriteBatch.Draw(sprite, spriteSize, Color.White);
 
             }
             else if (screen == Screen.Hall1) //hallway to level 1
