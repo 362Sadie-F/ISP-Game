@@ -211,7 +211,7 @@ namespace ISP_Game
             {
                 if (menuEscape.Contains(mouseState.Position))
                 {
-                    if (keyboardState.IsKeyDown(Keys.Escape))
+                    if (keyboardState.IsKeyDown(Keys.M))
                     {
                         screen = Screen.Menu;
                     }
