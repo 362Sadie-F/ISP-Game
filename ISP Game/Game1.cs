@@ -16,10 +16,23 @@ namespace ISP_Game
     public class Walls
     {
         List<Rectangle> mapWalls = new List<Rectangle>();
-        // mapWalls.Add(new Rectangle(0,0,600,30));
-        // new Rectangle(0,553,800,47)
-        // new Rectangle(0,0,600,30)
-        // new Rectangle(0,0,600,30)
+        // mapWalls.Add(new Rectangle(0,0,600,30)); 1
+        // mapWalls.Add(new Rectangle(320, 0, 500, 230)) 2
+        // mapWalls.Add(new Rectangle(320,290,500,60)) 3
+        // mapWalls.Add(new Rectangle(625,225,800-625,125)) 4
+        // mapWalls.Add(new Rectangle(750,0, 100, 600)) 5
+        // mapWalls.Add(new Rectangle(0,560,800,100)) 6
+        // mapWalls.Add(new Rectangle(0,173,95,9)) 7
+        // mapWalls.Add(new Rectangle(185,123,95,9)) 8
+        // mapWalls.Add(new Rectangle(0,330,95,9)) 9
+        // mapWalls.Add(new Rectangle(84,340,9,72)) 10
+        // mapWalls.Add(new Rectangle(195,330,95,9)) 11
+        // mapWalls.Add(new Rectangle(196,340,9,72)) 12
+        // mapWalls.Add(new Rectangle(320,348,9,72)) 13
+        // mapWalls.Add(new Rectangle(320,476,9,72)) 14
+        // mapWalls.Add(new Rectangle(430,425,22,125)) 15
+        // mapWalls.Add(new Rectangle(516,350,22,125)) 16
+        // mapWalls.Add(new Rectangle(6125,425,22,125)) 17
 
     }
 
@@ -34,6 +47,7 @@ namespace ISP_Game
         Rectangle goIn;
         Rectangle escape;
         Rectangle button0;
+        Rectangle button1;
         Rectangle level0Exit;
         Rectangle level1Exit;
         Rectangle menuEscape;
@@ -56,7 +70,7 @@ namespace ISP_Game
         Texture2D sprite;
         Texture2D toyBear;
         Texture2D toyCat;
-        Texture2D toyDoll;
+        Texture2D toyDuck;
         
         MouseState mouseState;
         KeyboardState keyboardState;
@@ -108,6 +122,7 @@ namespace ISP_Game
             {
                 goIn = new Rectangle(20, 205, 205, 255);
                 button0 = new Rectangle(270, 20, 660, 95);
+                button1 = new Rectangle(680, 20, 660, 95);
                 escape = new Rectangle(20, 115, 210, 165);
             }
 
@@ -136,6 +151,7 @@ namespace ISP_Game
             escapeButton = Content.Load<Texture2D>("EscapeButton");
             gameEnd = Content.Load<Texture2D>("GameOver");
             toyBear = Content.Load<Texture2D>("bearToy");
+            toyDuck = Content.Load<Texture2D>("duckToy");
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
             carousel = Content.Load<Song>("Carousel");
@@ -201,6 +217,14 @@ namespace ISP_Game
                     if (mouseState.RightButton == ButtonState.Pressed)
                     {
                         screen = Screen.Level0;
+                        MediaPlayer.Stop();
+                    }
+                }
+                if (button1.Contains(mouseState.Position))
+                {
+                    if (mouseState.RightButton == ButtonState.Pressed)
+                    {
+                        screen = Screen.Level1;
                         MediaPlayer.Stop();
                     }
                 }
@@ -289,6 +313,14 @@ namespace ISP_Game
                     screen = Screen.Hall2;
                 }
 
+                if (menuEscape.Contains(mouseState.Position))
+                {
+                    if (keyboardState.IsKeyDown(Keys.M))
+                    {
+                        screen = Screen.Menu;
+                    }
+                }
+
             }
 
             else if (screen == Screen.GameOver)
@@ -325,8 +357,8 @@ namespace ISP_Game
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
                 _spriteBatch.Draw(toyBear, toyLocation1, Color.White);
-                //_spriteBatch.Draw(toyCat, toyLocation2, Color.White);
-               // _spriteBatch.Draw(toyDoll, toyLocation3, Color.White);
+                _spriteBatch.Draw(toyDuck, toyLocation2, Color.White);
+               // _spriteBatch.Draw(toyCat, toyLocation3, Color.White);
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
 
             }
