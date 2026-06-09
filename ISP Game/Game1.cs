@@ -126,14 +126,8 @@ namespace ISP_Game
                 escape = new Rectangle(20, 115, 210, 165);
             }
 
-            else if (screen == Screen.Level0)
-            {
                 level0Exit = new Rectangle(615, 230, 625, 285);
                 
-                
-                
-                
-            }
             // level1Exit = new Rectangle(20, 115, 210, 165);
 
             base.Initialize();
@@ -288,6 +282,10 @@ namespace ISP_Game
                 }
                 spriteSize.Offset(spriteSpeed);
 
+                if (level0Exit.Intersects(spriteSize))
+                {
+                    screen = Screen.Hall1;
+                }
             }
 
             else if (screen == Screen.Hall1)
