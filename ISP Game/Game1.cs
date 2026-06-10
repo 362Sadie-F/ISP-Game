@@ -56,8 +56,9 @@ namespace ISP_Game
         Rectangle toyLocation3;
         Rectangle spriteSize;
         Vector2 spriteSpeed;
-        
-        
+
+        bool hasDuck = false;
+        bool hasBear = false;
 
         Texture2D menuScreen;
         Texture2D tutorial;
@@ -83,6 +84,7 @@ namespace ISP_Game
         SoundEffect emptyRoom;
         SoundEffectInstance emptyRoomEffect;
        
+
         
 
         enum Screen
@@ -126,7 +128,7 @@ namespace ISP_Game
                 escape = new Rectangle(20, 115, 210, 165);
             }
 
-                level0Exit = new Rectangle(615, 230, 625, 285);
+                level0Exit = new Rectangle(610, 230, 15, 55);
                 
             // level1Exit = new Rectangle(20, 115, 210, 165);
 
@@ -225,6 +227,12 @@ namespace ISP_Game
 
             }
 
+            else if (keyboardState.IsKeyDown(Keys.G))
+            {
+                screen = Screen.GameOver;
+                MediaPlayer.Stop();
+            }
+
             else if (screen == Screen.Level0)
             {
                 if (menuEscape.Contains(mouseState.Position))
@@ -248,20 +256,7 @@ namespace ISP_Game
                     MediaPlayer.Stop();
                     //door open and close sound, then continue to level1
                 }
-                //if (level0Exit.Contains(mouseState.Position))
-                //{
-                //    // if player has all 3 objects, continue to next level. if not do nothing
-                //    if (keyboardState.IsKeyDown(Keys.E))
-                //    {
-                //        screen = Screen.Hall1;
-                //    }
-                //}
-                
-                 if (keyboardState.IsKeyDown(Keys.G))
-                 {
-                   screen = Screen.GameOver;
-                   MediaPlayer.Stop();
-                 }
+               
 
                 spriteSpeed = Vector2.Zero;
                 if (keyboardState.IsKeyDown(Keys.W))
@@ -286,8 +281,13 @@ namespace ISP_Game
                 {
                     screen = Screen.Hall1;
                 }
-            }
 
+                if (toyLocation1.Contains(spriteSize))
+                {
+                    hasBear = true;
+                }
+            }
+               
             else if (screen == Screen.Hall1)
             {
                 if (keyboardState.IsKeyDown(Keys.O))
@@ -354,7 +354,14 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
-                _spriteBatch.Draw(toyBear, toyLocation1, Color.White);
+                if (hasBear == false)
+                { 
+                    _spriteBatch.Draw(toyBear, toyLocation1, Color.White); 
+                }
+                //else if (hasBear == true)
+                //{
+                //    _spriteBatch.Draw(toyBear, toyLocation1, Color.Transparent);
+                //}
                 _spriteBatch.Draw(toyDuck, toyLocation2, Color.White);
                // _spriteBatch.Draw(toyCat, toyLocation3, Color.White);
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
