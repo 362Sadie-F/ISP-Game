@@ -55,6 +55,7 @@ namespace ISP_Game
         Rectangle toyLocation2;
         Rectangle toyLocation3;
         Rectangle spriteSize;
+        List<Rectangle> mapWalls;
         Vector2 spriteSpeed;
 
         bool hasDuck = false;
@@ -104,6 +105,7 @@ namespace ISP_Game
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            mapWalls = new List<Rectangle>();
         }
 
         protected override void Initialize()
@@ -119,6 +121,24 @@ namespace ISP_Game
             toyLocation3 = new Rectangle(289, 38, 30, 30);
             spriteSize = new Rectangle(15, 255, 40, 40);
             spriteSpeed = Vector2.Zero;
+
+            mapWalls.Add(new Rectangle(0, 0, 600, 30)); //1
+            mapWalls.Add(new Rectangle(320, 0, 500, 230)); //2
+            mapWalls.Add(new Rectangle(320, 290, 500, 60)); //3
+            mapWalls.Add(new Rectangle(625, 225, 175, 125)); //4
+             mapWalls.Add(new Rectangle(750, 0, 100, 600)); //5
+             mapWalls.Add(new Rectangle(0, 560, 800, 100)); //6
+             mapWalls.Add(new Rectangle(0, 173, 95, 9)); //7
+             mapWalls.Add(new Rectangle(185, 123, 95, 9));// 8
+             mapWalls.Add(new Rectangle(0, 330, 95, 9));// 9
+             mapWalls.Add(new Rectangle(84, 340, 9, 72)); //10
+             mapWalls.Add(new Rectangle(195, 330, 95, 9)); //11
+             mapWalls.Add(new Rectangle(196, 340, 9, 72)); //12
+             mapWalls.Add(new Rectangle(320, 348, 9, 72)); //13
+             mapWalls.Add(new Rectangle(320, 476, 9, 72));// 14
+             mapWalls.Add(new Rectangle(430, 425, 22, 125));// 15
+             mapWalls.Add(new Rectangle(516, 350, 22, 125)); //16
+             mapWalls.Add(new Rectangle(6125, 425, 22, 125));// 17
 
             if (screen == Screen.Menu)
             {
