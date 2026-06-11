@@ -376,12 +376,14 @@ namespace ISP_Game
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
                 if (hasBear == false)
                 { 
-                    _spriteBatch.Draw(toyBear, toyLocation1, Color.White); 
+                    _spriteBatch.Draw(toyBear, toyLocation1, Color.White);
+                    
+                    if (hasBear == true)
+                    {
+                       _spriteBatch.Draw(toyBear, toyLocation1, Color.Transparent);
+                    }
                 }
-                //else if (hasBear == true)
-                //{
-                //    _spriteBatch.Draw(toyBear, toyLocation1, Color.Transparent);
-                //}
+                
                 _spriteBatch.Draw(toyDuck, toyLocation2, Color.White);
                // _spriteBatch.Draw(toyCat, toyLocation3, Color.White);
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
