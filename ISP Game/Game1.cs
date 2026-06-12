@@ -73,6 +73,7 @@ namespace ISP_Game
         Texture2D toyBear;
         Texture2D toyCat;
         Texture2D toyDuck;
+        Texture2D instructions;
         
         MouseState mouseState;
         KeyboardState keyboardState;
@@ -80,6 +81,8 @@ namespace ISP_Game
         Song fallenDown;
         Song lostWoods;
         Song carousel;
+        Song daisyBell;
+        Song circus;
         SoundEffect death;
         SoundEffectInstance deathEffect;
         SoundEffect emptyRoom;
@@ -138,7 +141,7 @@ namespace ISP_Game
              mapWalls.Add(new Rectangle(320, 476, 9, 72));// 14
              mapWalls.Add(new Rectangle(430, 425, 22, 125));// 15
              mapWalls.Add(new Rectangle(516, 350, 22, 125)); //16
-             mapWalls.Add(new Rectangle(6125, 425, 22, 125));// 17
+             mapWalls.Add(new Rectangle(625, 425, 22, 125));// 17
 
             if (screen == Screen.Menu)
             {
@@ -168,9 +171,13 @@ namespace ISP_Game
             gameEnd = Content.Load<Texture2D>("GameOver");
             toyBear = Content.Load<Texture2D>("bearToy");
             toyDuck = Content.Load<Texture2D>("duckToy");
+           // toyCat = Content.Load<Texture2D>("catToy");
+            instructions = Content.Load<Texture2D>("instructions");
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
             carousel = Content.Load<Song>("Carousel");
+            circus = Content.Load<Song>("circus");
+            daisyBell = Content.Load<Song>("daisyBell");
             emptyRoom = Content.Load<SoundEffect>("EmptyRoom");
             emptyRoomEffect = emptyRoom.CreateInstance();
             emptyRoomEffect.IsLooped = true;
@@ -262,6 +269,7 @@ namespace ISP_Game
                         screen = Screen.Menu;
                     }
                 }
+               // IsMouseVisible = false;
 
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
@@ -276,7 +284,13 @@ namespace ISP_Game
                     MediaPlayer.Stop();
                     //door open and close sound, then continue to level1
                 }
-               
+               foreach (Rectangle mapWall in mapWalls)
+               {
+                    if (spriteSize.Intersects(mapWall))
+                    {
+                        spriteSize.Offset(-spriteSpeed);
+                    }
+               }
 
                 spriteSpeed = Vector2.Zero;
                 if (keyboardState.IsKeyDown(Keys.W))
@@ -297,20 +311,28 @@ namespace ISP_Game
                 }
                 spriteSize.Offset(spriteSpeed);
 
-                if (level0Exit.Intersects(spriteSize))
+                if (hasBear == true && hasDuck == true )
                 {
-                    screen = Screen.Hall1;
+                    if (level0Exit.Intersects(spriteSize))
+                    {
+                        screen = Screen.Hall1;
+                    }
                 }
 
-                if (toyLocation1.Contains(spriteSize))
-                {
-                    hasBear = true;
-                }
+                    if (toyLocation1.Intersects(spriteSize))
+                    {
+                        hasBear = true;
+                    }
+                    if (toyLocation2.Intersects(spriteSize))
+                    {
+                        hasDuck = true;
+                    }
+                
             }
                
             else if (screen == Screen.Hall1)
             {
-                if (keyboardState.IsKeyDown(Keys.O))
+                if (keyboardState.IsKeyDown(Keys.L))
                 {
                     screen = Screen.Level1;
                 }
@@ -322,11 +344,11 @@ namespace ISP_Game
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
                     MediaPlayer.IsRepeating = true;
-                    MediaPlayer.Volume = 0.2f;
-                    MediaPlayer.Play(carousel);
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(circus);
                 }
 
-                if (keyboardState.IsKeyDown(Keys.P))
+                if (keyboardState.IsKeyDown(Keys.H))
                 {
                     screen = Screen.Hall2;
                 }
@@ -374,6 +396,7 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+                _spriteBatch.Draw(instructions, new Rectangle(15, 205, 350, 95), Color.White);
                 if (hasBear == false)
                 { 
                     _spriteBatch.Draw(toyBear, toyLocation1, Color.White);
@@ -383,8 +406,18 @@ namespace ISP_Game
                        _spriteBatch.Draw(toyBear, toyLocation1, Color.Transparent);
                     }
                 }
+                if (hasDuck == false)
+                {
+                    _spriteBatch.Draw(toyDuck, toyLocation2, Color.White);
+
+                    if (hasDuck == true)
+                    {
+                        _spriteBatch.Draw(toyDuck, toyLocation2, Color.Transparent);
+                    }
+                }
+
                 
-                _spriteBatch.Draw(toyDuck, toyLocation2, Color.White);
+
                // _spriteBatch.Draw(toyCat, toyLocation3, Color.White);
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
 
