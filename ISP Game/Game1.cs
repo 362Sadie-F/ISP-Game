@@ -60,6 +60,7 @@ namespace ISP_Game
 
         bool hasDuck = false;
         bool hasBear = false;
+        bool hasCat = false;
 
         Texture2D menuScreen;
         Texture2D tutorial;
@@ -171,7 +172,7 @@ namespace ISP_Game
             gameEnd = Content.Load<Texture2D>("GameOver");
             toyBear = Content.Load<Texture2D>("bearToy");
             toyDuck = Content.Load<Texture2D>("duckToy");
-           // toyCat = Content.Load<Texture2D>("catToy");
+            toyCat = Content.Load<Texture2D>("catToy");
             instructions = Content.Load<Texture2D>("instructions");
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
@@ -197,7 +198,7 @@ namespace ISP_Game
             
             
             Window.Title = "Toy Box " + mouseState.Position.ToString();
-            //collect 3 toys, move to door, have rectangle in front, code so it only advances when 3 toys are collected, display hallway photo for short time sound then move to next level.
+           
 
            if (menuEscape.Contains(mouseState.Position))
            {
@@ -311,7 +312,7 @@ namespace ISP_Game
                 }
                 spriteSize.Offset(spriteSpeed);
 
-                if (hasBear == true && hasDuck == true )
+                if (hasBear == true && hasDuck == true && hasCat == true)
                 {
                     if (level0Exit.Intersects(spriteSize))
                     {
@@ -327,7 +328,11 @@ namespace ISP_Game
                     {
                         hasDuck = true;
                     }
-                
+                if (toyLocation3.Intersects(spriteSize))
+                {
+                    hasCat = true;
+                }
+
             }
                
             else if (screen == Screen.Hall1)
@@ -415,10 +420,16 @@ namespace ISP_Game
                         _spriteBatch.Draw(toyDuck, toyLocation2, Color.Transparent);
                     }
                 }
+                if (hasCat == false)
+                {
+                    _spriteBatch.Draw(toyCat, toyLocation3, Color.White);
 
-                
+                    if (hasCat == true)
+                    {
+                        _spriteBatch.Draw(toyCat, toyLocation3, Color.Transparent);
+                    }
+                }
 
-               // _spriteBatch.Draw(toyCat, toyLocation3, Color.White);
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
 
             }
