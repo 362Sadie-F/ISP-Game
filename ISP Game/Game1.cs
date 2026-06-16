@@ -127,7 +127,7 @@ namespace ISP_Game
             toyLocation2 = new Rectangle(25, 358, 30, 30);
             toyLocation3 = new Rectangle(289, 38, 30, 30);
             spriteSize = new Rectangle(15, 255, 40, 40);
-            flashLight = new Rectangle(-690, -280, 1550, 1150);
+            flashLight = new Rectangle(-870, -430, 1800, 1450);
             spriteSpeed = Vector2.Zero;
             lightSpeed = Vector2.Zero;
 
