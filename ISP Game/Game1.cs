@@ -412,7 +412,6 @@ namespace ISP_Game
             else if (screen == Screen.Level0) //Tutorial
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
-                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
                 _spriteBatch.Draw(instructions, new Rectangle(15, 205, 350, 105), Color.White);
                 if (hasBear == false)
                 { 
@@ -444,6 +443,7 @@ namespace ISP_Game
 
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
                 _spriteBatch.Draw(light, flashLight, Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
 
             }
             else if (screen == Screen.Hall1) //hallway to level 1
