@@ -57,6 +57,7 @@ namespace ISP_Game
         Rectangle spriteSize;
         List<Rectangle> mapWalls;
         Vector2 spriteSpeed;
+        Vector2 lightSpeed;
         Rectangle flashLight;
 
         bool hasDuck = false;
@@ -126,8 +127,9 @@ namespace ISP_Game
             toyLocation2 = new Rectangle(25, 358, 30, 30);
             toyLocation3 = new Rectangle(289, 38, 30, 30);
             spriteSize = new Rectangle(15, 255, 40, 40);
-            flashLight = new Rectangle(0, 0, 800, 600);
+            flashLight = new Rectangle(-690, -280, 1550, 1150);
             spriteSpeed = Vector2.Zero;
+            lightSpeed = Vector2.Zero;
 
             mapWalls.Add(new Rectangle(0, 0, 600, 30)); //1
             mapWalls.Add(new Rectangle(320, 0, 500, 230)); //2
@@ -298,23 +300,29 @@ namespace ISP_Game
                }
 
                 spriteSpeed = Vector2.Zero;
+                lightSpeed = Vector2.Zero;
                 if (keyboardState.IsKeyDown(Keys.W))
                 {
                     spriteSpeed.Y -= 2;
+                    lightSpeed.Y -= 2;
                 }
                 if (keyboardState.IsKeyDown(Keys.S))
                 {
                     spriteSpeed.Y += 2;
+                    lightSpeed.Y += 2;
                 }
                 if (keyboardState.IsKeyDown(Keys.A))
                 {
                     spriteSpeed.X -= 2;
+                    lightSpeed.X -= 2;
                 }
                 if (keyboardState.IsKeyDown(Keys.D))
                 {
                     spriteSpeed.X += 2;
+                    lightSpeed.X += 2;
                 }
                 spriteSize.Offset(spriteSpeed);
+                flashLight.Offset(lightSpeed);
 
                 if (hasBear == true && hasDuck == true && hasCat == true)
                 {
