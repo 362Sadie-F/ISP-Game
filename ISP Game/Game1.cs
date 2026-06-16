@@ -57,6 +57,7 @@ namespace ISP_Game
         Rectangle spriteSize;
         List<Rectangle> mapWalls;
         Vector2 spriteSpeed;
+        Rectangle flashLight;
 
         bool hasDuck = false;
         bool hasBear = false;
@@ -75,6 +76,7 @@ namespace ISP_Game
         Texture2D toyCat;
         Texture2D toyDuck;
         Texture2D instructions;
+        Texture2D light;
         
         MouseState mouseState;
         KeyboardState keyboardState;
@@ -124,6 +126,7 @@ namespace ISP_Game
             toyLocation2 = new Rectangle(25, 358, 30, 30);
             toyLocation3 = new Rectangle(289, 38, 30, 30);
             spriteSize = new Rectangle(15, 255, 40, 40);
+            flashLight = new Rectangle(0, 0, 800, 600);
             spriteSpeed = Vector2.Zero;
 
             mapWalls.Add(new Rectangle(0, 0, 600, 30)); //1
@@ -186,6 +189,7 @@ namespace ISP_Game
             deathEffect = death.CreateInstance();
             deathEffect.IsLooped = false;
             sprite = Content.Load<Texture2D>("SpriteIdle");
+            light = Content.Load<Texture2D>("light");
 
         }
 
@@ -401,7 +405,7 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
-                _spriteBatch.Draw(instructions, new Rectangle(15, 205, 350, 95), Color.White);
+                _spriteBatch.Draw(instructions, new Rectangle(15, 205, 350, 105), Color.White);
                 if (hasBear == false)
                 { 
                     _spriteBatch.Draw(toyBear, toyLocation1, Color.White);
@@ -431,6 +435,7 @@ namespace ISP_Game
                 }
 
                 _spriteBatch.Draw(sprite, spriteSize, Color.White);
+                _spriteBatch.Draw(light, flashLight, Color.White);
 
             }
             else if (screen == Screen.Hall1) //hallway to level 1
