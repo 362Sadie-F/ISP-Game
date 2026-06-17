@@ -188,7 +188,7 @@ namespace ISP_Game
             fallenDown = Content.Load<Song>("FallenDown");
             lostWoods = Content.Load<Song>("LostWoods");
             carousel = Content.Load<Song>("Carousel");
-            circus = Content.Load<Song>("circus");
+            circus = Content.Load<Song>("circusLoop");
             daisyBell = Content.Load<Song>("daisyBell");
             emptyRoom = Content.Load<SoundEffect>("EmptyRoom");
             emptyRoomEffect = emptyRoom.CreateInstance();
@@ -436,13 +436,13 @@ namespace ISP_Game
             {
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
-                    deathEffect.Play();
-                    deathEffect.IsLooped = false;
-
-                    if (deathEffect.IsLooped == false)
+                    emptyRoomEffect.Play();
+                    emptyRoomEffect.IsLooped = true;
+                    
+                    if (MediaPlayer.State == MediaState.Stopped)
                     {
-                        emptyRoomEffect.IsLooped = true;
-                        emptyRoomEffect.Play();
+                        deathEffect.Play();
+                        deathEffect.IsLooped = false;
                     }
 
                 }
