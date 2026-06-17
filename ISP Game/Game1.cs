@@ -54,6 +54,9 @@ namespace ISP_Game
         Rectangle toyLocation1;
         Rectangle toyLocation2;
         Rectangle toyLocation3;
+        Rectangle toyLocation4;
+        Rectangle toyLocation5;
+        Rectangle toyLocation6;
         Rectangle spriteSize;
         List<Rectangle> mapWalls;
         Vector2 spriteSpeed;
@@ -126,6 +129,9 @@ namespace ISP_Game
             toyLocation1 = new Rectangle(714, 381, 30, 30);
             toyLocation2 = new Rectangle(25, 358, 30, 30);
             toyLocation3 = new Rectangle(289, 38, 30, 30);
+            toyLocation4 = new Rectangle(610, 85, 30, 30);
+            toyLocation5 = new Rectangle(135, 530, 30, 30);
+            toyLocation6 = new Rectangle(385, 195, 30, 30);
             spriteSize = new Rectangle(15, 255, 40, 40);
             flashLight = new Rectangle(-870, -430, 1800, 1450);
             spriteSpeed = Vector2.Zero;
@@ -157,9 +163,9 @@ namespace ISP_Game
                 escape = new Rectangle(20, 115, 210, 165);
             }
 
-                level0Exit = new Rectangle(610, 230, 15, 55);
+                level0Exit = new Rectangle(610, 230, 90, 90);
                 
-            // level1Exit = new Rectangle(20, 115, 210, 165);
+                level1Exit = new Rectangle(690, 245, 20, 15);
 
             base.Initialize();
         }
@@ -378,6 +384,52 @@ namespace ISP_Game
                     }
                 }
 
+                spriteSpeed = Vector2.Zero;
+                lightSpeed = Vector2.Zero;
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    spriteSpeed.Y -= 2;
+                    lightSpeed.Y -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    spriteSpeed.Y += 2;
+                    lightSpeed.Y += 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    spriteSpeed.X -= 2;
+                    lightSpeed.X -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    spriteSpeed.X += 2;
+                    lightSpeed.X += 2;
+                }
+                spriteSize.Offset(spriteSpeed);
+                flashLight.Offset(lightSpeed);
+
+                if (hasBear == true && hasDuck == true && hasCat == true)
+                {
+                    if (level1Exit.Intersects(spriteSize))
+                    {
+                        screen = Screen.Hall2;
+                    }
+                }
+
+                if (toyLocation4.Intersects(spriteSize))
+                {
+                    hasBear = true;
+                }
+                if (toyLocation5.Intersects(spriteSize))
+                {
+                    hasDuck = true;
+                }
+                if (toyLocation6.Intersects(spriteSize))
+                {
+                    hasCat = true;
+                }
+
             }
 
             else if (screen == Screen.GameOver)
@@ -409,6 +461,7 @@ namespace ISP_Game
                 _spriteBatch.Draw(menuScreen, new Rectangle(0, 0, 800, 600), Color.White);
 
             }
+           
             else if (screen == Screen.Level0) //Tutorial
             {
                 _spriteBatch.Draw(tutorial, new Rectangle(0, 0, 800, 600), Color.White);
@@ -446,19 +499,54 @@ namespace ISP_Game
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
 
             }
+           
             else if (screen == Screen.Hall1) //hallway to level 1
             {
                 _spriteBatch.Draw(hallway1, new Rectangle(0, 0, 800, 600), Color.White);
             }
+           
             else if (screen == Screen.Level1) //level 1
             {
                 _spriteBatch.Draw(level1, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+                if (hasBear == false)
+                {
+                    _spriteBatch.Draw(toyBear, toyLocation4, Color.White);
+
+                    if (hasBear == true)
+                    {
+                        _spriteBatch.Draw(toyBear, toyLocation4, Color.Transparent);
+                    }
+                }
+                if (hasDuck == false)
+                {
+                    _spriteBatch.Draw(toyDuck, toyLocation5, Color.White);
+
+                    if (hasDuck == true)
+                    {
+                        _spriteBatch.Draw(toyDuck, toyLocation5, Color.Transparent);
+                    }
+                }
+                if (hasCat == false)
+                {
+                    _spriteBatch.Draw(toyCat, toyLocation6, Color.White);
+
+                    if (hasCat == true)
+                    {
+                        _spriteBatch.Draw(toyCat, toyLocation6, Color.Transparent);
+                    }
+                }
+
+                _spriteBatch.Draw(sprite, spriteSize, Color.White);
+                _spriteBatch.Draw(light, flashLight, Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
             }
+            
             else if (screen == Screen.Hall2) //hallway to level 2
             {
                 _spriteBatch.Draw(hallway2, new Rectangle(0, 0, 800, 600), Color.White);
             }
+           
             else if (screen == Screen.GameOver) //game loose
             {
                 _spriteBatch.Draw(gameEnd, new Rectangle(0, 0, 800, 600), Color.White);
