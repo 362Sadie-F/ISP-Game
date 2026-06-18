@@ -50,6 +50,7 @@ namespace ISP_Game
         Rectangle button1;
         Rectangle level0Exit;
         Rectangle level1Exit;
+        Rectangle level2Exit;
         Rectangle menuEscape;
         Rectangle toyLocation1;
         Rectangle toyLocation2;
@@ -60,9 +61,9 @@ namespace ISP_Game
         Rectangle spriteSize;
         List<Rectangle> mapWalls;
         List<Rectangle> mapWallsL1;
-        List<Rectangle> mapWalls2;
-        List<Rectangle> mapWalls3;
-        List<Rectangle> mapWalls4;
+        List<Rectangle> mapWallsL2;
+        List<Rectangle> mapWallsL3;
+        List<Rectangle> mapWallsL4;
         Vector2 spriteSpeed;
         Vector2 lightSpeed;
         Rectangle flashLight;
@@ -74,8 +75,10 @@ namespace ISP_Game
         Texture2D menuScreen;
         Texture2D tutorial;
         Texture2D level1;
+        Texture2D level2;
         Texture2D hallway1;
         Texture2D hallway2;
+        Texture2D hallway3;
         Texture2D goInButton;
         Texture2D escapeButton;
         Texture2D gameEnd;
@@ -109,6 +112,8 @@ namespace ISP_Game
             Hall1, //door open and close
             Level1, //numbers
             Hall2, //door open and close
+            Level2,
+            Hall3,
             GameOver, //"The END is just the BEGINing" click on end to esc, click on begin to restart
             GameWin //"You escaped"
         }
@@ -121,6 +126,9 @@ namespace ISP_Game
             IsMouseVisible = true;
             mapWalls = new List<Rectangle>();
             mapWallsL1 = new List<Rectangle>();
+            mapWallsL2 = new List<Rectangle>();
+            mapWallsL3 = new List<Rectangle>();
+            mapWallsL4 = new List<Rectangle>();
         }
 
         protected override void Initialize()
@@ -199,6 +207,32 @@ namespace ISP_Game
             mapWallsL1.Add(new Rectangle(109, 377, 16, 203));
             mapWallsL1.Add(new Rectangle(112, 572, 369, 10));
 
+            mapWallsL2.Add(new Rectangle(210, 10, 490, 13));
+            mapWallsL2.Add(new Rectangle(687, 10, 11, 186));
+            mapWallsL2.Add(new Rectangle(575, 189, 124, 14));
+            mapWallsL2.Add(new Rectangle(208, 188, 262, 14));
+            mapWallsL2.Add(new Rectangle(208, 124, 10, 78));
+            mapWallsL2.Add(new Rectangle(28, 123, 190, 10));
+            mapWallsL2.Add(new Rectangle(28, 61, 9, 73));
+            mapWallsL2.Add(new Rectangle(37, 60, 181, 11));
+            mapWallsL2.Add(new Rectangle(209, 10, 9, 62));
+            mapWallsL2.Add(new Rectangle(396, 197, 8, 53));
+            mapWallsL2.Add(new Rectangle(88, 237, 316, 13));
+            mapWallsL2.Add(new Rectangle(88, 215, 8, 23));
+            mapWallsL2.Add(new Rectangle(-5, 214, 101, 12));
+            mapWallsL2.Add(new Rectangle(637, 201, 13, 199));
+            mapWallsL2.Add(new Rectangle(392, 389, 258, 11));
+            mapWallsL2.Add(new Rectangle(392, 308, 10, 81));
+            mapWallsL2.Add(new Rectangle(89, 308, 313, 12));
+            mapWallsL2.Add(new Rectangle(89, 320, 9, 126));
+            mapWallsL2.Add(new Rectangle(98, 433, 553, 13));
+            mapWallsL2.Add(new Rectangle(639, 433, 12, 141));
+            mapWallsL2.Add(new Rectangle(404, 563, 235, 11));
+            mapWallsL2.Add(new Rectangle(404, 501, 10, 62));
+            mapWallsL2.Add(new Rectangle(89, 499, 325, 13));
+            mapWallsL2.Add(new Rectangle(89, 514, 10, 47));
+            mapWallsL2.Add(new Rectangle(-8, 546, 107, 15));
+
             if (screen == Screen.Menu)
             {
                 goIn = new Rectangle(20, 205, 205, 255);
@@ -211,6 +245,8 @@ namespace ISP_Game
                 
                 level1Exit = new Rectangle(690, 245, 20, 15);
 
+            level2Exit = new Rectangle(690, 245, 20, 15);
+
             base.Initialize();
         }
 
@@ -220,8 +256,10 @@ namespace ISP_Game
             menuScreen = Content.Load<Texture2D>("Menu");
             tutorial = Content.Load<Texture2D>("0");
             level1 = Content.Load<Texture2D>("1");
+            level2 = Content.Load<Texture2D>("2");
             hallway1 = Content.Load<Texture2D>("DaycareHall");
             hallway2 = Content.Load<Texture2D>("SchoolHall");
+            hallway3 = Content.Load<Texture2D>("HomeHall");
             goInButton = Content.Load<Texture2D>("GoIn");
             escapeButton = Content.Load<Texture2D>("EscapeButton");
             gameEnd = Content.Load<Texture2D>("GameOver");
@@ -483,6 +521,79 @@ namespace ISP_Game
 
             }
 
+            else if (screen == Screen.Level1)
+            {
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(circus);
+                }
+                foreach (Rectangle mapWall in mapWallsL2)
+                {
+                    if (spriteSize.Intersects(mapWall))
+                    {
+                        spriteSize.Offset(-spriteSpeed);
+                    }
+                }
+
+
+                if (menuEscape.Contains(mouseState.Position))
+                {
+                    if (keyboardState.IsKeyDown(Keys.M))
+                    {
+                        screen = Screen.Menu;
+                    }
+                }
+
+                spriteSpeed = Vector2.Zero;
+                lightSpeed = Vector2.Zero;
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    spriteSpeed.Y -= 2;
+                    lightSpeed.Y -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    spriteSpeed.Y += 2;
+                    lightSpeed.Y += 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    spriteSpeed.X -= 2;
+                    lightSpeed.X -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    spriteSpeed.X += 2;
+                    lightSpeed.X += 2;
+                }
+                spriteSize.Offset(spriteSpeed);
+                flashLight.Offset(lightSpeed);
+
+                if (hasBear == true && hasDuck == true && hasCat == true)
+                {
+                    if (level2Exit.Intersects(spriteSize))
+                    {
+                        screen = Screen.Hall3;
+                    }
+                }
+
+                if (toyLocation4.Intersects(spriteSize))
+                {
+                    hasBear = true;
+                }
+                if (toyLocation5.Intersects(spriteSize))
+                {
+                    hasDuck = true;
+                }
+                if (toyLocation6.Intersects(spriteSize))
+                {
+                    hasCat = true;
+                }
+
+            }
+
             else if (screen == Screen.GameOver)
             {
                 if (MediaPlayer.State == MediaState.Stopped)
@@ -597,7 +708,17 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(hallway2, new Rectangle(0, 0, 800, 600), Color.White);
             }
-           
+
+            else if (screen == Screen.Level2) //hallway to level 2
+            {
+                _spriteBatch.Draw(level2, new Rectangle(0, 0, 800, 600), Color.White);
+            }
+
+            else if (screen == Screen.Hall3) //hallway to level 2
+            {
+                _spriteBatch.Draw(hallway3, new Rectangle(0, 0, 800, 600), Color.White);
+            }
+
             else if (screen == Screen.GameOver) //game loose
             {
                 _spriteBatch.Draw(gameEnd, new Rectangle(0, 0, 800, 600), Color.White);
