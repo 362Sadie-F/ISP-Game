@@ -59,6 +59,10 @@ namespace ISP_Game
         Rectangle toyLocation6;
         Rectangle spriteSize;
         List<Rectangle> mapWalls;
+        List<Rectangle> mapWallsL1;
+        List<Rectangle> mapWalls2;
+        List<Rectangle> mapWalls3;
+        List<Rectangle> mapWalls4;
         Vector2 spriteSpeed;
         Vector2 lightSpeed;
         Rectangle flashLight;
@@ -116,6 +120,7 @@ namespace ISP_Game
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             mapWalls = new List<Rectangle>();
+            mapWallsL1 = new List<Rectangle>();
         }
 
         protected override void Initialize()
@@ -154,6 +159,45 @@ namespace ISP_Game
              mapWalls.Add(new Rectangle(430, 425, 22, 125));// 15
              mapWalls.Add(new Rectangle(516, 350, 22, 125)); //16
              mapWalls.Add(new Rectangle(625, 425, 22, 125));// 17
+
+            mapWallsL1.Add(new Rectangle(98, 30, 14, 156));
+            mapWallsL1.Add(new Rectangle(4, 177, 218, 6));
+            mapWallsL1.Add(new Rectangle(208, 166, 15, 20));
+            mapWallsL1.Add(new Rectangle(294, 165, 13, 19));
+            mapWallsL1.Add(new Rectangle(296, 175, 270, 11));
+            mapWallsL1.Add(new Rectangle(468, 150, 12, 30));
+            mapWallsL1.Add(new Rectangle(469, 149, 221, 10));
+            mapWallsL1.Add(new Rectangle(672, 65, 17, 92));
+            mapWallsL1.Add(new Rectangle(469, 65, 212, 6));
+            mapWallsL1.Add(new Rectangle(466, 28, 18, 40));
+            mapWallsL1.Add(new Rectangle(98, 30, 14, 156));
+            mapWallsL1.Add(new Rectangle(4, 177, 218, 6));
+            mapWallsL1.Add(new Rectangle(208, 166, 15, 20));
+            mapWallsL1.Add(new Rectangle(294, 165, 13, 19));
+            mapWallsL1.Add(new Rectangle(296, 175, 270, 11));
+            mapWallsL1.Add(new Rectangle(468, 150, 12, 30));
+            mapWallsL1.Add(new Rectangle(469, 149, 221, 10));
+            mapWallsL1.Add(new Rectangle(672, 65, 17, 92));
+            mapWallsL1.Add(new Rectangle(469, 65, 212, 6));
+            mapWallsL1.Add(new Rectangle(466, 28, 18, 40));
+            mapWallsL1.Add(new Rectangle(96, 21, 376, 14));
+            mapWallsL1.Add(new Rectangle(535, 701, 203, 38));
+            mapWallsL1.Add(new Rectangle(553, 175, 15, 71));
+            mapWallsL1.Add(new Rectangle(542, 238, 173, 12));
+            mapWallsL1.Add(new Rectangle(702, 239, 11, 92));
+            mapWallsL1.Add(new Rectangle(542, 322, 171, 9));
+            mapWallsL1.Add(new Rectangle(555, 328, 10, 61));
+            mapWallsL1.Add(new Rectangle(295, 376, 270, 13));
+            mapWallsL1.Add(new Rectangle(295, 376, 12, 19));
+            mapWallsL1.Add(new Rectangle(208, 378, 13, 17));
+            mapWallsL1.Add(new Rectangle(-6, 377, 226, 9));
+            mapWallsL1.Add(new Rectangle(467, 386, 15, 48));
+            mapWallsL1.Add(new Rectangle(468, 423, 110, 13));
+            mapWallsL1.Add(new Rectangle(566, 425, 10, 118));
+            mapWallsL1.Add(new Rectangle(467, 535, 111, 7));
+            mapWallsL1.Add(new Rectangle(467, 535, 12, 42));
+            mapWallsL1.Add(new Rectangle(109, 377, 16, 203));
+            mapWallsL1.Add(new Rectangle(112, 572, 369, 10));
 
             if (screen == Screen.Menu)
             {
@@ -369,6 +413,13 @@ namespace ISP_Game
                     MediaPlayer.IsRepeating = true;
                     MediaPlayer.Volume = 0.5f;
                     MediaPlayer.Play(circus);
+                }
+                foreach (Rectangle mapWall in mapWallsL1)
+                {
+                    if (spriteSize.Intersects(mapWall))
+                    {
+                        spriteSize.Offset(-spriteSpeed);
+                    }
                 }
 
                 if (keyboardState.IsKeyDown(Keys.H))
