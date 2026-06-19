@@ -48,9 +48,14 @@ namespace ISP_Game
         Rectangle escape;
         Rectangle button0;
         Rectangle button1;
+        Rectangle button2;
+        Rectangle button3;
+        Rectangle button4;
         Rectangle level0Exit;
         Rectangle level1Exit;
         Rectangle level2Exit;
+        Rectangle level3Exit;
+        Rectangle level4Exit;
         Rectangle menuEscape;
         Rectangle toyLocation1;
         Rectangle toyLocation2;
@@ -58,6 +63,18 @@ namespace ISP_Game
         Rectangle toyLocation4;
         Rectangle toyLocation5;
         Rectangle toyLocation6;
+        Rectangle toyLocation7;
+        Rectangle toyLocation8;
+        Rectangle toyLocation9;
+        Rectangle toyLocation10;
+        Rectangle toyLocation11;
+        Rectangle toyLocation12;
+        Rectangle toyLocation13;
+        Rectangle toyLocation14;
+        Rectangle toyLocation15;
+        Rectangle bugLocation1;
+        Rectangle bugLocation2;
+        Rectangle bugLocation3;
         Rectangle spriteSize;
         List<Rectangle> mapWalls;
         List<Rectangle> mapWallsL1;
@@ -76,19 +93,24 @@ namespace ISP_Game
         Texture2D tutorial;
         Texture2D level1;
         Texture2D level2;
+        Texture2D level3;
+        Texture2D level4;
         Texture2D hallway1;
         Texture2D hallway2;
         Texture2D hallway3;
+        Texture2D hallway4;
         Texture2D goInButton;
         Texture2D escapeButton;
         Texture2D gameEnd;
+        Texture2D gameWin;
         Texture2D sprite;
         Texture2D toyBear;
         Texture2D toyCat;
         Texture2D toyDuck;
         Texture2D instructions;
         Texture2D light;
-        
+        Texture2D bug;
+       
         MouseState mouseState;
         KeyboardState keyboardState;
 
@@ -114,6 +136,9 @@ namespace ISP_Game
             Hall2, //door open and close
             Level2,
             Hall3,
+            Level3,
+            Hall4,
+            Level4,
             GameOver, //"The END is just the BEGINing" click on end to esc, click on begin to restart
             GameWin //"You escaped"
         }
@@ -145,6 +170,18 @@ namespace ISP_Game
             toyLocation4 = new Rectangle(610, 85, 30, 30);
             toyLocation5 = new Rectangle(135, 530, 30, 30);
             toyLocation6 = new Rectangle(385, 195, 30, 30);
+            toyLocation7 = new Rectangle(0, 0, 30, 30);
+            toyLocation8 = new Rectangle(0, 0, 30, 30);
+            toyLocation9 = new Rectangle(0, 0, 30, 30);
+            toyLocation10 = new Rectangle(0, 0, 30, 30);
+            toyLocation11 = new Rectangle(0, 0, 30, 30);
+            toyLocation12 = new Rectangle(0, 0, 30, 30);
+            toyLocation13 = new Rectangle(0, 0, 30, 30);
+            toyLocation14 = new Rectangle(0, 0, 30, 30);
+            toyLocation15 = new Rectangle(0, 0, 30, 30);
+            bugLocation1 = new Rectangle(0, 0, 30, 30);
+            bugLocation2 = new Rectangle(0, 0, 30, 30);
+            bugLocation3 = new Rectangle(0, 0, 30, 30);
             spriteSize = new Rectangle(15, 255, 40, 40);
             flashLight = new Rectangle(-870, -430, 1800, 1450);
             spriteSpeed = Vector2.Zero;
@@ -233,11 +270,72 @@ namespace ISP_Game
             mapWallsL2.Add(new Rectangle(89, 514, 10, 47));
             mapWallsL2.Add(new Rectangle(-8, 546, 107, 15));
 
+            mapWallsL3.Add(new Rectangle(-1, 196, 147, 19));
+            mapWallsL3.Add(new Rectangle(71, 78, 11, 132));
+            mapWallsL3.Add(new Rectangle(71, 78, 388, 14));
+            mapWallsL3.Add(new Rectangle(444, 90, 261, 18));
+            mapWallsL3.Add(new Rectangle(685, 108, 20, 419));
+            mapWallsL3.Add(new Rectangle(552, 513, 133, 14));
+            mapWallsL3.Add(new Rectangle(552, 491, 18, 22));
+            mapWallsL3.Add(new Rectangle(433, 492, 137, 11));
+            mapWallsL3.Add(new Rectangle(433, 503, 14, 48));
+            mapWallsL3.Add(new Rectangle(82, 533, 365, 18));
+            mapWallsL3.Add(new Rectangle(82, 410, 13, 123));
+            mapWallsL3.Add(new Rectangle(0, 404, 144, 12));
+            mapWallsL3.Add(new Rectangle(241, 198, 218, 15));
+            mapWallsL3.Add(new Rectangle(446, 174, 13, 39));
+            mapWallsL3.Add(new Rectangle(446, 174, 123, 11));
+            mapWallsL3.Add(new Rectangle(550, 185, 19, 65));
+            mapWallsL3.Add(new Rectangle(394, 238, 156, 12));
+            mapWallsL3.Add(new Rectangle(394, 238, 16, 100));
+            mapWallsL3.Add(new Rectangle(410, 322, 158, 16));
+            mapWallsL3.Add(new Rectangle(551, 322, 17, 116));
+            mapWallsL3.Add(new Rectangle(433, 425, 118, 13));
+            mapWallsL3.Add(new Rectangle(433, 407, 13, 18));
+            mapWallsL3.Add(new Rectangle(249, 407, 197, 12));
+            mapWallsL3.Add(new Rectangle(274, 207, 14, 199));
+
+            mapWallsL4.Add(new Rectangle(2, 30, 322, 14));
+            mapWallsL4.Add(new Rectangle(312, 44, 12, 25));
+            mapWallsL4.Add(new Rectangle(312, 56, 226, 13));
+            mapWallsL4.Add(new Rectangle(527, 22, 11, 34));
+            mapWallsL4.Add(new Rectangle(527, 22, 163, 13));
+            mapWallsL4.Add(new Rectangle(687, 22, 10, 523));
+            mapWallsL4.Add(new Rectangle(407, 531, 298, 12));
+            mapWallsL4.Add(new Rectangle(407, 303, 11, 240));
+            mapWallsL4.Add(new Rectangle(274, 302, 144, 8));
+            mapWallsL4.Add(new Rectangle(274, 311, 9, 232));
+            mapWallsL4.Add(new Rectangle(7, 532, 276, 11));
+            mapWallsL4.Add(new Rectangle(7, 203, 20, 329));
+            mapWallsL4.Add(new Rectangle(27, 203, 265, 15));
+            mapWallsL4.Add(new Rectangle(277, 218, 15, 22));
+            mapWallsL4.Add(new Rectangle(277, 223, 141, 17));
+            mapWallsL4.Add(new Rectangle(406, 164, 12, 59));
+            mapWallsL4.Add(new Rectangle(406, 163, 179, 13));
+            mapWallsL4.Add(new Rectangle(516, 131, 22, 35));
+            mapWallsL4.Add(new Rectangle(312, 130, 204, 12));
+            mapWallsL4.Add(new Rectangle(312, 143, 15, 44));
+            mapWallsL4.Add(new Rectangle(-14, 169, 341, 18));
+            mapWallsL4.Add(new Rectangle(656, 164, 35, 9));
+            mapWallsL4.Add(new Rectangle(664, 323, 36, 9));
+            mapWallsL4.Add(new Rectangle(414, 321, 173, 12));
+            mapWallsL4.Add(new Rectangle(25, 348, 179, 9));
+            mapWallsL4.Add(new Rectangle(113, 350, 14, 44));
+            mapWallsL4.Add(new Rectangle(113, 446, 13, 89));
+            mapWallsL4.Add(new Rectangle(411, 327, 59, 145));
+            mapWallsL4.Add(new Rectangle(412, 514, 144, 21));
+            mapWallsL4.Add(new Rectangle(615, 455, 23, 75));
+            mapWallsL4.Add(new Rectangle(520, 371, 25, 74));
+            mapWallsL4.Add(new Rectangle(520, 370, 178, 26));
+
             if (screen == Screen.Menu)
             {
                 goIn = new Rectangle(20, 205, 205, 255);
                 button0 = new Rectangle(270, 20, 660, 95);
                 button1 = new Rectangle(680, 20, 660, 95);
+                button2 = new Rectangle(565, 120, 95, 80);
+                button3 = new Rectangle(680, 125, 95, 80);
+                button4 = new Rectangle(570, 230, 95, 80);
                 escape = new Rectangle(20, 115, 210, 165);
             }
 
@@ -245,7 +343,11 @@ namespace ISP_Game
                 
                 level1Exit = new Rectangle(690, 245, 20, 15);
 
-            level2Exit = new Rectangle(690, 245, 20, 15);
+               // level2Exit = new Rectangle(690, 245, 20, 15);
+
+               // level3Exit = new Rectangle(0, 0, 30, 30);
+           
+            //    level4Exit = new Rectangle(0, 0, 30, 30);
 
             base.Initialize();
         }
@@ -257,12 +359,17 @@ namespace ISP_Game
             tutorial = Content.Load<Texture2D>("0");
             level1 = Content.Load<Texture2D>("1");
             level2 = Content.Load<Texture2D>("2");
+            level3 = Content.Load<Texture2D>("3");
+            level4 = Content.Load<Texture2D>("4");
             hallway1 = Content.Load<Texture2D>("DaycareHall");
             hallway2 = Content.Load<Texture2D>("SchoolHall");
             hallway3 = Content.Load<Texture2D>("HomeHall");
+            hallway4 = Content.Load<Texture2D>("ForestHall");
             goInButton = Content.Load<Texture2D>("GoIn");
+            bug = Content.Load<Texture2D>("bug");
             escapeButton = Content.Load<Texture2D>("EscapeButton");
             gameEnd = Content.Load<Texture2D>("GameOver");
+            gameWin = Content.Load<Texture2D>("escape2");
             toyBear = Content.Load<Texture2D>("bearToy");
             toyDuck = Content.Load<Texture2D>("duckToy");
             toyCat = Content.Load<Texture2D>("catToy");
@@ -343,6 +450,30 @@ namespace ISP_Game
                     if (mouseState.RightButton == ButtonState.Pressed)
                     {
                         screen = Screen.Level1;
+                        MediaPlayer.Stop();
+                    }
+                }
+                if (button2.Contains(mouseState.Position))
+                {
+                    if (mouseState.RightButton == ButtonState.Pressed)
+                    {
+                        screen = Screen.Level2;
+                        MediaPlayer.Stop();
+                    }
+                }
+                if (button3.Contains(mouseState.Position))
+                {
+                    if (mouseState.RightButton == ButtonState.Pressed)
+                    {
+                        screen = Screen.Level3;
+                        MediaPlayer.Stop();
+                    }
+                }
+                if (button4.Contains(mouseState.Position))
+                {
+                    if (mouseState.RightButton == ButtonState.Pressed)
+                    {
+                        screen = Screen.Level4;
                         MediaPlayer.Stop();
                     }
                 }
@@ -521,7 +652,7 @@ namespace ISP_Game
 
             }
 
-            else if (screen == Screen.Level1)
+            else if (screen == Screen.Level2)
             {
                 if (MediaPlayer.State == MediaState.Stopped)
                 {
@@ -590,6 +721,165 @@ namespace ISP_Game
                 if (toyLocation6.Intersects(spriteSize))
                 {
                     hasCat = true;
+                }
+
+            }
+
+            else if (screen == Screen.Level3)
+            {
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(circus);
+                }
+                foreach (Rectangle mapWall in mapWallsL3)
+                {
+                    if (spriteSize.Intersects(mapWall))
+                    {
+                        spriteSize.Offset(-spriteSpeed);
+                    }
+                }
+
+
+                if (menuEscape.Contains(mouseState.Position))
+                {
+                    if (keyboardState.IsKeyDown(Keys.M))
+                    {
+                        screen = Screen.Menu;
+                    }
+                }
+
+                spriteSpeed = Vector2.Zero;
+                lightSpeed = Vector2.Zero;
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    spriteSpeed.Y -= 2;
+                    lightSpeed.Y -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    spriteSpeed.Y += 2;
+                    lightSpeed.Y += 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    spriteSpeed.X -= 2;
+                    lightSpeed.X -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    spriteSpeed.X += 2;
+                    lightSpeed.X += 2;
+                }
+                spriteSize.Offset(spriteSpeed);
+                flashLight.Offset(lightSpeed);
+
+                if (hasBear == true && hasDuck == true && hasCat == true)
+                {
+                    if (level3Exit.Intersects(spriteSize))
+                    {
+                        screen = Screen.Hall4;
+                    }
+                }
+
+                if (toyLocation7.Intersects(spriteSize))
+                {
+                    hasBear = true;
+                }
+                if (toyLocation8.Intersects(spriteSize))
+                {
+                    hasDuck = true;
+                }
+                if (toyLocation9.Intersects(spriteSize))
+                {
+                    hasCat = true;
+                }
+
+            }
+
+            else if (screen == Screen.Level4)
+            {
+                if (MediaPlayer.State == MediaState.Stopped)
+                {
+                    MediaPlayer.IsRepeating = true;
+                    MediaPlayer.Volume = 0.5f;
+                    MediaPlayer.Play(circus);
+                }
+                foreach (Rectangle mapWall in mapWallsL4)
+                {
+                    if (spriteSize.Intersects(mapWall))
+                    {
+                        spriteSize.Offset(-spriteSpeed);
+                    }
+                }
+
+
+                if (menuEscape.Contains(mouseState.Position))
+                {
+                    if (keyboardState.IsKeyDown(Keys.M))
+                    {
+                        screen = Screen.Menu;
+                    }
+                }
+
+                spriteSpeed = Vector2.Zero;
+                lightSpeed = Vector2.Zero;
+                if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    spriteSpeed.Y -= 2;
+                    lightSpeed.Y -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    spriteSpeed.Y += 2;
+                    lightSpeed.Y += 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    spriteSpeed.X -= 2;
+                    lightSpeed.X -= 2;
+                }
+                if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    spriteSpeed.X += 2;
+                    lightSpeed.X += 2;
+                }
+                spriteSize.Offset(spriteSpeed);
+                flashLight.Offset(lightSpeed);
+
+                if (hasBear == true && hasDuck == true && hasCat == true)
+                {
+                    if (level4Exit.Intersects(spriteSize))
+                    {
+                        screen = Screen.GameWin;
+                    }
+                }
+
+                if (toyLocation13.Intersects(spriteSize))
+                {
+                    hasBear = true;
+                }
+                if (toyLocation14.Intersects(spriteSize))
+                {
+                    hasDuck = true;
+                }
+                if (toyLocation15.Intersects(spriteSize))
+                {
+                    hasCat = true;
+                }
+
+                if (bugLocation1.Intersects(spriteSize))
+                {
+                    screen = Screen.GameOver;
+                }
+                if (bugLocation2.Intersects(spriteSize))
+                {
+                    screen = Screen.GameOver;
+                }
+                if (bugLocation3.Intersects(spriteSize))
+                {
+                    screen = Screen.GameOver;
                 }
 
             }
@@ -712,6 +1002,38 @@ namespace ISP_Game
             else if (screen == Screen.Level2) //hallway to level 2
             {
                 _spriteBatch.Draw(level2, new Rectangle(0, 0, 800, 600), Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+                if (hasBear == false)
+                {
+                    _spriteBatch.Draw(toyBear, toyLocation7, Color.White);
+
+                    if (hasBear == true)
+                    {
+                        _spriteBatch.Draw(toyBear, toyLocation7, Color.Transparent);
+                    }
+                }
+                if (hasDuck == false)
+                {
+                    _spriteBatch.Draw(toyDuck, toyLocation8, Color.White);
+
+                    if (hasDuck == true)
+                    {
+                        _spriteBatch.Draw(toyDuck, toyLocation8, Color.Transparent);
+                    }
+                }
+                if (hasCat == false)
+                {
+                    _spriteBatch.Draw(toyCat, toyLocation9, Color.White);
+
+                    if (hasCat == true)
+                    {
+                        _spriteBatch.Draw(toyCat, toyLocation9, Color.Transparent);
+                    }
+                }
+
+                _spriteBatch.Draw(sprite, spriteSize, Color.White);
+                _spriteBatch.Draw(light, flashLight, Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
             }
 
             else if (screen == Screen.Hall3) //hallway to level 2
@@ -719,9 +1041,94 @@ namespace ISP_Game
                 _spriteBatch.Draw(hallway3, new Rectangle(0, 0, 800, 600), Color.White);
             }
 
+            else if (screen == Screen.Level3) //hallway to level 2
+            {
+                _spriteBatch.Draw(level2, new Rectangle(0, 0, 800, 600), Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+                if (hasBear == false)
+                {
+                    _spriteBatch.Draw(toyBear, toyLocation10, Color.White);
+
+                    if (hasBear == true)
+                    {
+                        _spriteBatch.Draw(toyBear, toyLocation10, Color.Transparent);
+                    }
+                }
+                if (hasDuck == false)
+                {
+                    _spriteBatch.Draw(toyDuck, toyLocation11, Color.White);
+
+                    if (hasDuck == true)
+                    {
+                        _spriteBatch.Draw(toyDuck, toyLocation11, Color.Transparent);
+                    }
+                }
+                if (hasCat == false)
+                {
+                    _spriteBatch.Draw(toyCat, toyLocation12, Color.White);
+
+                    if (hasCat == true)
+                    {
+                        _spriteBatch.Draw(toyCat, toyLocation12, Color.Transparent);
+                    }
+                }
+
+                _spriteBatch.Draw(sprite, spriteSize, Color.White);
+                _spriteBatch.Draw(light, flashLight, Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+            }
+
+            else if (screen == Screen.Hall4) //hallway to level 2
+            {
+                _spriteBatch.Draw(hallway4, new Rectangle(0, 0, 800, 600), Color.White);
+            }
+
+            else if (screen == Screen.Level4) //hallway to level 2
+            {
+                _spriteBatch.Draw(level4, new Rectangle(0, 0, 800, 600), Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+                if (hasBear == false)
+                {
+                    _spriteBatch.Draw(toyBear, toyLocation13, Color.White);
+
+                    if (hasBear == true)
+                    {
+                        _spriteBatch.Draw(toyBear, toyLocation13, Color.Transparent);
+                    }
+                }
+                if (hasDuck == false)
+                {
+                    _spriteBatch.Draw(toyDuck, toyLocation14, Color.White);
+
+                    if (hasDuck == true)
+                    {
+                        _spriteBatch.Draw(toyDuck, toyLocation14, Color.Transparent);
+                    }
+                }
+                if (hasCat == false)
+                {
+                    _spriteBatch.Draw(toyCat, toyLocation15, Color.White);
+
+                    if (hasCat == true)
+                    {
+                        _spriteBatch.Draw(toyCat, toyLocation15, Color.Transparent);
+                    }
+                }
+
+                _spriteBatch.Draw(sprite, spriteSize, Color.White);
+                _spriteBatch.Draw(light, flashLight, Color.White);
+                _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
+            }
+
+
             else if (screen == Screen.GameOver) //game loose
             {
                 _spriteBatch.Draw(gameEnd, new Rectangle(0, 0, 800, 600), Color.White);
+            }
+
+            else if (screen == Screen.GameWin) //game loose
+            {
+                _spriteBatch.Draw(gameWin, new Rectangle(0, 0, 800, 600), Color.White);
             }
 
             _spriteBatch.End();
