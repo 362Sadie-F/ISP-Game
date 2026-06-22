@@ -151,6 +151,12 @@
 /processorParam:Quality=Best
 /build:de@thEffect.mp3
 
+#begin door.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:door.mp3
+
 #begin duckToy.png
 /importer:TextureImporter
 /processor:TextureProcessor
