@@ -95,6 +95,16 @@ namespace ISP_Game
         bool hasDuck = false;
         bool hasBear = false;
         bool hasCat = false;
+        bool hasDuck1 = false;
+        bool hasBear1 = false;
+        bool hasCat1 = false;
+        bool hasDuck2 = false;
+        bool hasBear2 = false;
+        bool hasCat2 = false;
+        bool hasDuck3 = false;
+        bool hasBear3 = false;
+        bool hasCat3 = false;
+
 
         Texture2D menuScreen;
         Texture2D tutorial;
@@ -654,7 +664,7 @@ namespace ISP_Game
                 spriteSizeL1.Offset(spriteSpeed);
                 flashLight1.Offset(lightSpeed);
 
-                if (hasBear == true && hasDuck == true && hasCat == true)
+                if (hasBear1 == true && hasDuck1 == true && hasCat1 == true)
                 {
                     if (level1Exit.Intersects(spriteSizeL1))
                     {
@@ -666,15 +676,15 @@ namespace ISP_Game
 
                 if (toyLocation4.Intersects(spriteSizeL1))
                 {
-                    hasBear = true;
+                    hasBear1 = true;
                 }
                 if (toyLocation5.Intersects(spriteSizeL1))
                 {
-                    hasDuck = true;
+                    hasDuck1 = true;
                 }
                 if (toyLocation6.Intersects(spriteSizeL1))
                 {
-                    hasCat = true;
+                    hasCat1 = true;
                 }
 
             }
@@ -744,7 +754,7 @@ namespace ISP_Game
                 spriteSizeL2.Offset(spriteSpeed);
                 flashLight2.Offset(lightSpeed);
 
-                if (hasBear == true && hasDuck == true && hasCat == true)
+                if (hasBear2 == true && hasDuck2 == true && hasCat2 == true)
                 {
                     if (level2Exit.Intersects(spriteSizeL2))
                     {
@@ -756,15 +766,15 @@ namespace ISP_Game
 
                 if (toyLocation7.Intersects(spriteSizeL2))
                 {
-                    hasBear = true;
+                    hasBear2 = true;
                 }
                 if (toyLocation8.Intersects(spriteSizeL2))
                 {
-                    hasDuck = true;
+                    hasDuck2 = true;
                 }
                 if (toyLocation9.Intersects(spriteSizeL2))
                 {
-                    hasCat = true;
+                    hasCat2 = true;
                 }
 
             }
@@ -835,7 +845,7 @@ namespace ISP_Game
                 spriteSizeL3.Offset(spriteSpeed);
                 flashLight3.Offset(lightSpeed);
 
-                if (hasBear == true && hasDuck == true && hasCat == true)
+                if (hasBear3 == true && hasDuck3 == true && hasCat3 == true)
                 {
                     if (level3Exit.Intersects(spriteSizeL3))
                     {
@@ -850,15 +860,15 @@ namespace ISP_Game
 
                 if (toyLocation10.Intersects(spriteSizeL3))
                 {
-                    hasBear = true;
+                    hasBear3 = true;
                 }
                 if (toyLocation11.Intersects(spriteSizeL3))
                 {
-                    hasDuck = true;
+                    hasDuck3 = true;
                 }
                 if (toyLocation12.Intersects(spriteSizeL3))
                 {
-                    hasCat = true;
+                    hasCat3 = true;
                 }
 
             }
@@ -1036,29 +1046,29 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(level1, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
-                if (hasBear == false)
+                if (hasBear1 == false)
                 {
                     _spriteBatch.Draw(toyBear, toyLocation4, Color.White);
 
-                    if (hasBear == true)
+                    if (hasBear1 == true)
                     {
                         _spriteBatch.Draw(toyBear, toyLocation4, Color.Transparent);
                     }
                 }
-                if (hasDuck == false)
+                if (hasDuck1 == false)
                 {
                     _spriteBatch.Draw(toyDuck, toyLocation5, Color.White);
 
-                    if (hasDuck == true)
+                    if (hasDuck1 == true)
                     {
                         _spriteBatch.Draw(toyDuck, toyLocation5, Color.Transparent);
                     }
                 }
-                if (hasCat == false)
+                if (hasCat1 == false)
                 {
                     _spriteBatch.Draw(toyCat, toyLocation6, Color.White);
 
-                    if (hasCat == true)
+                    if (hasCat1 == true)
                     {
                         _spriteBatch.Draw(toyCat, toyLocation6, Color.Transparent);
                     }
@@ -1078,29 +1088,29 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(level2, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
-                if (hasBear == false)
+                if (hasBear2 == false)
                 {
                     _spriteBatch.Draw(toyBear, toyLocation7, Color.White);
 
-                    if (hasBear == true)
+                    if (hasBear2 == true)
                     {
                         _spriteBatch.Draw(toyBear, toyLocation7, Color.Transparent);
                     }
                 }
-                if (hasDuck == false)
+                if (hasDuck2 == false)
                 {
                     _spriteBatch.Draw(toyDuck, toyLocation8, Color.White);
 
-                    if (hasDuck == true)
+                    if (hasDuck2 == true)
                     {
                         _spriteBatch.Draw(toyDuck, toyLocation8, Color.Transparent);
                     }
                 }
-                if (hasCat == false)
+                if (hasCat2 == false)
                 {
                     _spriteBatch.Draw(toyCat, toyLocation9, Color.White);
 
-                    if (hasCat == true)
+                    if (hasCat2 == true)
                     {
                         _spriteBatch.Draw(toyCat, toyLocation9, Color.Transparent);
                     }
@@ -1120,29 +1130,29 @@ namespace ISP_Game
             {
                 _spriteBatch.Draw(level3, new Rectangle(0, 0, 800, 600), Color.White);
                 _spriteBatch.Draw(escapeButton, menuEscape, Color.White);
-                if (hasBear == false)
+                if (hasBear3 == false)
                 {
                     _spriteBatch.Draw(toyBear, toyLocation10, Color.White);
 
-                    if (hasBear == true)
+                    if (hasBear3 == true)
                     {
                         _spriteBatch.Draw(toyBear, toyLocation10, Color.Transparent);
                     }
                 }
-                if (hasDuck == false)
+                if (hasDuck3 == false)
                 {
                     _spriteBatch.Draw(toyDuck, toyLocation11, Color.White);
 
-                    if (hasDuck == true)
+                    if (hasDuck3 == true)
                     {
                         _spriteBatch.Draw(toyDuck, toyLocation11, Color.Transparent);
                     }
                 }
-                if (hasCat == false)
+                if (hasCat3 == false)
                 {
                     _spriteBatch.Draw(toyCat, toyLocation12, Color.White);
 
-                    if (hasCat == true)
+                    if (hasCat3 == true)
                     {
                         _spriteBatch.Draw(toyCat, toyLocation12, Color.Transparent);
                     }
